@@ -1,8 +1,7 @@
-import React, {usestate} from "react";
+import React, {useState} from "react";
 import '../styles/App.css';
 
-const foodData = 
-    [
+const foodData = [
         {
           id: 1,
           title: 'buttermilk pancakes',
@@ -79,41 +78,36 @@ const foodData =
 
 
 const App= () => {
-    let [breakFastFoodItems , setBreakFastFoodItems] = usestate([]);
+    let [FoodItems , setFoodItems] = useState(foodData);
 
-    function getFoodItems(){
-      setBreakFastFoodItems (foodData.filter(food => food.category === "breakfast"))
+    function getFoodItems(category){
+      setFoodItems(foodData.filter(food => food.category === category))
 
-       console.log(breakFastFoodItems);
+      //  console.log(breakFastFoodItems);
     }
 
     return (
         <div>
         <h1>Our Menu</h1>
-
         <div className="categories">
             <button className="btn">All</button>
-            <button className="btn" onClick={getFoodItems}>Breakfast</button>
-            <button className="btn">Lunch</button>
-            <button className="btn">Shakes</button>
+            <button className="btn" onClick={ ()=>getFoodItems("breakfast")}>Breakfast</button>
+            <button className="btn" onClick={ ()=>getFoodItems("lunch")}>Lunch</button>
+            <button className="btn" onClick={ ()=>getFoodItems("shakes")}>Shakes</button>
         </div>
 
         <div className="food-card">
-            {foodData.map((food) => (
+            {FoodItems.map((food) => (
                 <div className="food-card-item">
-                    <div className="food-card-item">
-                        <h1>{food.title}</h1>
+                        <h3>{food.title}</h3>
                         <p>{food.price}</p>
                         <p>{food.desc}</p>
-                    </div>
+                    
                 </div>
             ))
             }
         </div>
-
-        {
-            breakFastFoodItems ? breakFastFoodItems[0].title : <p>No Breakfast</p>
-        }
+      
         </div>
     );
 }
