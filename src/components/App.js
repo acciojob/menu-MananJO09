@@ -79,7 +79,7 @@ const foodData = [
 
 const App= () => {
     let [FoodItems , setFoodItems] = useState(foodData);
-
+  
     function getFoodItems(category){
       setFoodItems(foodData.filter(food => food.category === category))
 
@@ -87,13 +87,13 @@ const App= () => {
     }
 
     return (
-        <div>
+        <div className="main">
         <h1>Our Menu</h1>
         <div className="categories">
-            <button className="btn">All</button>
-            <button className="btn" onClick={ ()=>getFoodItems("breakfast")}>Breakfast</button>
-            <button className="btn" onClick={ ()=>getFoodItems("lunch")}>Lunch</button>
-            <button className="btn" onClick={ ()=>getFoodItems("shakes")}>Shakes</button>
+            <button className="btn" onClick={()=>setFoodItems("foodData")}>All</button>
+            <button className="btn" id="filter-btn-3" onClick={ ()=>getFoodItems("breakfast")}>Breakfast</button>
+            <button className="btn" id="filter-btn-2" onClick={ ()=>getFoodItems("lunch")}>Lunch</button>
+            <button className="btn" id="filter-btn-1" onClick={ ()=>getFoodItems("shakes")}>Shakes</button>
         </div>
 
         <div className="food-card">
@@ -101,13 +101,11 @@ const App= () => {
                 <div className="food-card-item">
                         <h3>{food.title}</h3>
                         <p>{food.price}</p>
-                        <p>{food.desc}</p>
-                    
+                        <p>{food.desc}</p>      
                 </div>
             ))
             }
         </div>
-      
         </div>
     );
 }
